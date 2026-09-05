@@ -1,157 +1,172 @@
-:root {
-  --void: #07070A;
-  --crust: #101018;
-  --regolith: #1A1A24;
-  --rim: #2A2A38;
-  --dust: #8A8798;
-  --chalk: #E8E6EF;
-  --gold: #C9A227;
-  --gold-bright: #E7C14A;
-  --warning: #B5482F;
-  --measure: 66ch;
-}
+<!DOCTYPE html>
+<html lang="en-GB">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Moon Technologies</title>
+<meta name="description" content="Moon Technologies builds Moon Trading, a simulated investing app that scores every trade on how well it fits your portfolio. Simulated funds only.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;600&family=IBM+Plex+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<div class="shell">
 
-*, *::before, *::after { box-sizing: border-box; }
+<header class="site">
+  <a class="wordmark" href="/">MO<span>O</span>N</a>
+  <nav class="site">
+    <a href="/" aria-current="page">Home</a>
+    <a href="/support.html">Support</a>
+    <a href="/privacy.html">Privacy</a>
+  </nav>
+</header>
 
-html { -webkit-text-size-adjust: 100%; }
+<main>
+  <h1>Investing practice that scores your judgement, not your luck</h1>
+  <p class="lead">Moon Trading is a simulated investing app. You start with a notional ten thousand pounds, and every order is scored before it fills on how well it fits the portfolio you already hold.</p>
 
-body {
-  margin: 0;
-  background: var(--void);
-  color: var(--chalk);
-  font-family: 'IBM Plex Sans', system-ui, sans-serif;
-  font-size: 17px;
-  line-height: 1.65;
-  -webkit-font-smoothing: antialiased;
-}
+  <section class="demo" aria-labelledby="demo-heading">
+    <div class="disc-wrap">
+      <svg viewBox="0 0 240 240" role="img" aria-labelledby="demo-heading">
+        <title id="demo-heading">Trade score shown as a moon phase</title>
+        <clipPath id="disc"><circle cx="120" cy="120" r="118"/></clipPath>
+        <circle cx="120" cy="120" r="118" fill="#1A1A24"/>
+        <path id="terminator" clip-path="url(#disc)" fill="#E7C14A"/>
+        <circle cx="120" cy="120" r="118" fill="none" stroke="#2A2A38" stroke-width="2"/>
+      </svg>
+      <div class="disc-readout">
+        <div class="disc-score" id="score">83</div>
+        <div class="disc-unit">out of 100</div>
+      </div>
+    </div>
 
-.shell { width: min(100% - 3rem, 62rem); margin-inline: auto; }
+    <div>
+      <p class="verdict" id="verdict">A considered trade</p>
+      <p class="reason" id="reason">Sized so one bad quarter cannot sink you, and it adds a sector you are not already leaning on.</p>
+      <label class="control" for="size">Put <b id="sizeLabel">12%</b> of the portfolio into a single company</label>
+      <input type="range" id="size" min="1" max="90" value="12" step="1">
+      <p class="small muted" style="margin-top:1rem">Drag to see how position size alone moves the score. The app weighs six other factors alongside it.</p>
+    </div>
+  </section>
 
-a { color: var(--gold-bright); text-decoration-thickness: 1px; text-underline-offset: 3px; }
-a:hover { color: var(--chalk); }
-a:focus-visible, button:focus-visible, input:focus-visible {
-  outline: 2px solid var(--gold-bright);
-  outline-offset: 3px;
-}
+  <h2>What the score is made of</h2>
+  <p>Seven weighted factors, each measured against the portfolio you hold at the moment you place the order. The app shows you every one, with the number behind it and the reasoning in plain English.</p>
 
-header.site {
-  display: flex;
-  align-items: baseline;
-  justify-content: space-between;
-  gap: 2rem;
-  padding: 2rem 0 3rem;
-  flex-wrap: wrap;
-}
+  <table class="data">
+    <thead><tr><th scope="col">Factor</th><th scope="col">Weight</th><th scope="col">What it measures</th></tr></thead>
+    <tbody>
+      <tr><td>Position size</td><td>0.22</td><td>Your holding after the trade, against a 15% cap for a single company</td></tr>
+      <tr><td>Sector spread</td><td>0.18</td><td>How much of the portfolio would sit in one sector</td></tr>
+      <tr><td>Diversification</td><td>0.18</td><td>How closely this moves with what you already own</td></tr>
+      <tr><td>Income quality</td><td>0.15</td><td>Dividend yield, gated by whether earnings actually cover it</td></tr>
+      <tr><td>Volatility</td><td>0.12</td><td>How hard the price swings, and how far it follows the market</td></tr>
+      <tr><td>Liquidity</td><td>0.08</td><td>What it would cost you to sell in a hurry</td></tr>
+      <tr><td>Patience</td><td>0.07</td><td>How long you held, scored when you sell</td></tr>
+    </tbody>
+  </table>
 
-.wordmark {
-  font-weight: 300;
-  font-size: 1.15rem;
-  letter-spacing: 0.42em;
-  color: var(--chalk);
-  text-decoration: none;
-}
-.wordmark span { color: var(--gold); }
+  <div class="callout">
+    <p>Some trades are capped regardless of everything else. Put more than half the portfolio into one company and no combination of good factors will lift the score above 34, because nothing offsets single-company risk at that size.</p>
+  </div>
 
-nav.site { display: flex; gap: 1.75rem; font-size: 0.95rem; }
-nav.site a { color: var(--dust); text-decoration: none; }
-nav.site a:hover, nav.site a[aria-current='page'] { color: var(--gold-bright); }
+  <h2>Ranked on judgement, not returns</h2>
+  <p>The leaderboard sorts on points earned from trade quality. It shows profit and loss, but it does not rank on it. Ranking on returns rewards whoever took the biggest undiversified bet that month, which is the behaviour the app exists to discourage.</p>
 
-h1 {
-  font-weight: 300;
-  font-size: clamp(2.4rem, 6vw, 4rem);
-  line-height: 1.08;
-  letter-spacing: -0.02em;
-  margin: 0 0 1.25rem;
-  max-width: 18ch;
-}
+  <h2>Built for people learning</h2>
+  <div class="facts">
+    <div>
+      <h3>No real money</h3>
+      <p>Balances, positions and results are simulated. There is no brokerage account, no order routing and no payment details.</p>
+    </div>
+    <div>
+      <h3>End-of-day prices</h3>
+      <p>Orders fill at the next close rather than instantly, which removes the incentive to trade on minute-by-minute noise.</p>
+    </div>
+    <div>
+      <h3>Reasoning, not verdicts</h3>
+      <p>Every factor explains itself. The aim is that you stop needing the score, not that you chase it.</p>
+    </div>
+  </div>
 
-h2 {
-  font-weight: 500;
-  font-size: 1.5rem;
-  letter-spacing: -0.01em;
-  margin: 3.5rem 0 1rem;
-  max-width: 30ch;
-}
+  <h2>About Moon Technologies</h2>
+  <p>Moon Technologies is a company registered in England and Wales, building financial education software for the UK market.</p>
+  <dl class="meta">
+    <dt>Registered name</dt><dd>[LEGAL COMPANY NAME]</dd>
+    <dt>Company number</dt><dd>[COMPANY NUMBER]</dd>
+    <dt>Registered office</dt><dd>[REGISTERED ADDRESS]</dd>
+    <dt>Contact</dt><dd><a href="mailto:hello@[YOURDOMAIN]">hello@[YOURDOMAIN]</a></dd>
+  </dl>
 
-h3 { font-weight: 600; font-size: 1.05rem; margin: 2rem 0 0.5rem; }
+  <p class="small muted">Moon Trading is a simulation and an educational tool. Nothing in the app or on this site is financial advice, or a recommendation to buy or sell any investment. Moon Technologies is not authorised or regulated by the Financial Conduct Authority and does not provide regulated financial services.</p>
+</main>
 
-p, li { max-width: var(--measure); color: var(--chalk); }
-p.lead { font-size: 1.2rem; color: var(--dust); max-width: 54ch; }
-.muted { color: var(--dust); }
-.small { font-size: 0.9rem; }
+<footer class="site">
+  <div>&copy; 2026 Moon Technologies</div>
+  <nav>
+    <a href="/support.html">Support</a>
+    <a href="/privacy.html">Privacy</a>
+    <a href="/terms.html">Terms</a>
+  </nav>
+</footer>
 
-.demo {
-  display: grid;
-  grid-template-columns: minmax(0, 15rem) minmax(0, 1fr);
-  gap: 3rem;
-  align-items: center;
-  padding: 3rem 0 3.5rem;
-  border-top: 1px solid var(--rim);
-  border-bottom: 1px solid var(--rim);
-  margin: 3rem 0;
-}
-@media (max-width: 44rem) { .demo { grid-template-columns: 1fr; gap: 2rem; } }
+</div>
 
-.disc-wrap { position: relative; width: 100%; max-width: 15rem; }
-.disc-readout {
-  position: absolute; inset: 0;
-  display: grid; place-content: center;
-  font-family: 'IBM Plex Mono', ui-monospace, monospace;
-  color: var(--void);
-  pointer-events: none;
-}
-.disc-score { font-size: 2.9rem; font-weight: 600; line-height: 1; }
-.disc-unit { font-size: 0.7rem; opacity: 0.6; text-align: center; margin-top: 0.2rem; }
+<script>
+(function () {
+  var slider = document.getElementById('size');
+  var terminator = document.getElementById('terminator');
+  var scoreEl = document.getElementById('score');
+  var verdictEl = document.getElementById('verdict');
+  var reasonEl = document.getElementById('reason');
+  var sizeLabel = document.getElementById('sizeLabel');
 
-.verdict { font-size: 1.35rem; font-weight: 400; margin: 0 0 0.5rem; }
-.reason { color: var(--dust); margin: 0 0 1.75rem; max-width: 44ch; }
+  function clamp(v) { return Math.max(-1, Math.min(1, v)); }
 
-label.control { display: block; color: var(--dust); font-size: 0.95rem; margin-bottom: 0.6rem; }
-label.control b { color: var(--chalk); font-family: 'IBM Plex Mono', monospace; font-weight: 600; }
+  function phasePath(illumination) {
+    var r = 118, cx = 120, cy = 120;
+    var offset = r * (1 - 2 * illumination);
+    var rx = Math.abs(offset);
+    var inner = illumination > 0.5 ? 1 : 0;
+    return 'M ' + cx + ' ' + (cy - r) +
+           ' A ' + r + ' ' + r + ' 0 0 1 ' + cx + ' ' + (cy + r) +
+           ' A ' + rx + ' ' + r + ' 0 0 ' + inner + ' ' + cx + ' ' + (cy - r) + ' Z';
+  }
 
-input[type='range'] {
-  width: min(100%, 26rem);
-  accent-color: var(--gold);
-  height: 1.75rem;
-}
+  function render() {
+    var weight = Number(slider.value) / 100;
+    var sizeScore = weight <= 0.15 ? 1 : clamp(1 - (weight - 0.15) / 0.15);
+    var sectorScore = weight <= 0.3 ? 1 : clamp(1 - (weight - 0.3) / 0.3);
+    var others = 0.42;
+    var weighted = sizeScore * 0.22 + sectorScore * 0.18 + others * 0.6;
+    var raw = Math.round(((weighted + 1) / 2) * 100);
+    var capped = weight > 0.5 ? Math.min(raw, 34) : raw;
 
-.facts { display: grid; gap: 2.5rem; grid-template-columns: repeat(auto-fit, minmax(15rem, 1fr)); margin: 2.5rem 0; }
-.facts p { margin: 0.35rem 0 0; color: var(--dust); font-size: 0.97rem; }
-.facts h3 { margin: 0; color: var(--chalk); }
+    var illumination = Math.max(0.02, Math.min(1, capped / 100));
+    terminator.setAttribute('d', phasePath(illumination));
+    terminator.setAttribute('fill', capped >= 55 ? '#E7C14A' : capped >= 35 ? '#C9A227' : '#B5482F');
 
-dl.meta { display: grid; grid-template-columns: max-content 1fr; gap: 0.5rem 2rem; margin: 1.5rem 0; }
-dl.meta dt { color: var(--dust); }
-dl.meta dd { margin: 0; font-family: 'IBM Plex Mono', monospace; font-size: 0.95rem; }
+    scoreEl.textContent = capped;
+    sizeLabel.textContent = slider.value + '%';
 
-table.data { border-collapse: collapse; width: 100%; max-width: 46rem; margin: 1.5rem 0; font-size: 0.95rem; }
-table.data th, table.data td { text-align: left; padding: 0.7rem 1rem 0.7rem 0; border-bottom: 1px solid var(--rim); vertical-align: top; }
-table.data th { color: var(--dust); font-weight: 500; }
+    if (capped >= 75) {
+      verdictEl.textContent = 'A considered trade';
+      reasonEl.textContent = 'Sized so one bad quarter cannot sink you, and it adds a sector you are not already leaning on.';
+    } else if (capped >= 55) {
+      verdictEl.textContent = 'A reasonable trade';
+      reasonEl.textContent = 'Larger than ideal for one company, but not enough to put the whole portfolio at risk.';
+    } else if (capped >= 35) {
+      verdictEl.textContent = 'This stretches your portfolio';
+      reasonEl.textContent = 'One company now drives most of your result. A single profit warning would undo months of work.';
+    } else {
+      verdictEl.textContent = 'This concentrates risk sharply';
+      reasonEl.textContent = 'More than half the portfolio in one company. The score is capped at 34 because no other quality offsets single-company risk at this size.';
+    }
+  }
 
-.callout {
-  border-left: 2px solid var(--gold);
-  padding: 0.25rem 0 0.25rem 1.25rem;
-  margin: 2rem 0;
-}
-
-footer.site {
-  border-top: 1px solid var(--rim);
-  margin-top: 5rem;
-  padding: 2.5rem 0 4rem;
-  color: var(--dust);
-  font-size: 0.9rem;
-  display: flex;
-  justify-content: space-between;
-  gap: 2rem;
-  flex-wrap: wrap;
-}
-footer.site a { color: var(--dust); }
-footer.site nav { display: flex; gap: 1.5rem; }
-
-.legal p, .legal li { color: var(--dust); }
-.legal h2 { color: var(--chalk); }
-.legal ul { padding-left: 1.1rem; }
-.legal li { margin-bottom: 0.5rem; }
-
-@media (prefers-reduced-motion: reduce) {
-  * { transition: none !important; animation: none !important; }
-}
+  slider.addEventListener('input', render);
+  render();
+})();
+</script>
+</body>
+</html>
